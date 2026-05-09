@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import ytdl from "@distube/ytdl-core";
 import type { Readable } from "node:stream";
+import {
+  formatYoutubeErrorForUser,
+  getYtdlOptions,
+} from "@/lib/youtubeServer";
 
 export const config = {
   api: {
@@ -34,7 +38,8 @@ export default async function handler(
   let stream: Readable;
 
   try {
-    const info = await ytdl.getInfo(url);
+    const opts = getYtdlOptions();
+    const info = await ytdl.getInfo(url, opts);
     const titleRaw = info.videoDetails.title || "download";
     const baseName = asciiFilename(titleRaw, "download");
 
@@ -53,7 +58,7 @@ export default async function handler(
         });
         return;
       }
-      stream = ytdl.downloadFromInfo(info, { format });
+      stream = ytdl.downloadFromInfo(info, { format, ...opts });
       const ext =
         format.container === "mp4" || format.mimeType?.includes("mp4")
           ? "m4a"
@@ -72,7 +77,7 @@ export default async function handler(
         });
         return;
       }
-      stream = ytdl.downloadFromInfo(info, { format });
+      stream = ytdl.downloadFromInfo(info, { format, ...opts });
       const ext = format.container === "webm" ? "webm" : "mp4";
       filename = `${baseName}.${ext}`;
       contentType = format.mimeType?.split(";")[0] ?? "video/mp4";
@@ -97,10 +102,9 @@ export default async function handler(
 
     stream.pipe(res);
   } catch (e) {
-    const message = e instanceof Error ? e.message : "下載失敗";
     if (!res.headersSent) {
       res.status(502).json({
-        error: message.includes("private") ? "私人或無法存取的影片" : message,
+        error: formatYoutubeErrorForUser(e),
       });
     }
   }

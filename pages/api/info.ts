@@ -1,5 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import ytdl from "@distube/ytdl-core";
+import {
+  formatYoutubeErrorForUser,
+  getYtdlOptions,
+} from "@/lib/youtubeServer";
 
 export const config = {
   api: {
@@ -25,7 +29,7 @@ export default async function handler(
   }
 
   try {
-    const info = await ytdl.getInfo(url);
+    const info = await ytdl.getInfo(url, getYtdlOptions());
     const title = info.videoDetails.title ?? "";
 
     if (type === "audio") {
@@ -57,10 +61,9 @@ export default async function handler(
 
     res.status(200).json({ ok: true, title });
   } catch (e) {
-    const message = e instanceof Error ? e.message : "無法讀取影片資訊";
     res.status(502).json({
       ok: false,
-      error: message.includes("private") ? "私人或無法存取的影片" : message,
+      error: formatYoutubeErrorForUser(e),
     });
   }
 }

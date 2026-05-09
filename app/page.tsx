@@ -54,6 +54,14 @@ export default function Home() {
           </code>
           。
         </p>
+        <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+          若出現「Sign in to confirm you&apos;re not a
+          bot」：代表 YouTube 擋下匿名請求。自架站可在 Vercel 設定環境變數{" "}
+          <code className="rounded bg-black/30 px-1 font-mono">
+            YOUTUBE_COOKIE
+          </code>{" "}
+          （已登入 YouTube 的瀏覽器 Cookie，勿公開）；或改用本機腳本。
+        </p>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
