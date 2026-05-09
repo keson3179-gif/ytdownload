@@ -1,0 +1,22 @@
+# 本機下載的影片／音訊
+/downloads/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Next.js（web）
+web/node_modules/
+web/.next/
+web/out/
+web/.vercel
+web/.env*.local
+web/*.tsbuildinfo
+
+# OS / 編輯器
+.DS_Store
+Thumbs.db
+*.log
