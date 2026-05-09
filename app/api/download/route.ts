@@ -56,7 +56,7 @@ export async function GET(request: Request) {
         return Response.json(
           {
             error:
-              "此影片沒有可單檔下載的畫質（多為高畫質僅提供分流）。請改用本機 youtube_download.py + yt-dlp，或接受較低畫質時可至 YouTube 網頁確認是否仍有合併格式。",
+              "此影片沒有可單檔下載的畫質（多為高畫質僅提供分流）。請改用本機 scripts/youtube_download.py + yt-dlp，或接受較低畫質時可至 YouTube 網頁確認是否仍有合併格式。",
           },
           { status: 422 }
         );

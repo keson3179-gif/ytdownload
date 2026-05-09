@@ -17,7 +17,7 @@ from pathlib import Path
 try:
     import yt_dlp
 except ImportError:
-    print("請先安裝依賴：pip install -r requirements.txt", file=sys.stderr)
+    print("請先安裝依賴：pip install -r scripts/requirements.txt", file=sys.stderr)
     sys.exit(1)
 
 

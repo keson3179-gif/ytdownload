@@ -27,7 +27,7 @@ export async function GET(request: Request) {
           {
             ok: false,
             error:
-              "此影片無可用的僅音訊格式，請改試「影片」或改用本機 youtube_download.py。",
+              "此影片無可用的僅音訊格式，請改試「影片」或改用本機 scripts/youtube_download.py。",
           },
           { status: 422 }
         );

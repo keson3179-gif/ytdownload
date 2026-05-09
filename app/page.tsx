@@ -50,7 +50,7 @@ export default function Home() {
           貼上連結後選擇影片或音訊。雲端版僅能使用 YouTube
           仍提供的單檔串流；超時或高畫質合併請用本機{" "}
           <code className="rounded bg-black/30 px-1 font-mono text-xs">
-            youtube_download.py
+            scripts/youtube_download.py
           </code>
           。
         </p>

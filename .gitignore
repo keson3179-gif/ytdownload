@@ -1,22 +1,30 @@
 # 本機下載的影片／音訊
 /downloads/
 
-# Python
+# Python（CLI 在 scripts/）
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .env
 
-# Next.js（web）
-web/node_modules/
-web/.next/
-web/out/
-web/.vercel
-web/.env*.local
-web/*.tsbuildinfo
+# Node / Next.js
+node_modules/
+.next/
+out/
+.vercel
+.env*.local
+*.tsbuildinfo
+.pnp*
+.yarn/install-state.gz
+/coverage
+/build
 
 # OS / 編輯器
 .DS_Store
 Thumbs.db
+*.pem
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
